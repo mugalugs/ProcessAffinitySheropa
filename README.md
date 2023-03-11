@@ -7,4 +7,4 @@ For anticheat like EAC just set the affinity on the launcher, as the game proces
 
 AffinitySherpa (use this one) is WinForms, made after the MAUI experiment. ProcessAffinitySherpa is the MAUI experiement and discontinued based on the fact that side loading without installing is currently not supported by MS.
 
-![Example of all of the windows on the same screen](https://github.com/mugalugs/ProcessAffinitySheropa/raw/master/screenshots/winforms.png)
+![Example of all of the windows on the same screen](https://github.com/mugalugs/ProcessAffinitySheropa/raw/main/screenshots/winforms.png)

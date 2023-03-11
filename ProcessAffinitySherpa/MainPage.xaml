@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProcessAffinitySherpa.MainPage">
+
+    <HorizontalStackLayout
+        Spacing="25"
+        Padding="30,0"
+        VerticalOptions="Start">
+
+        <VerticalStackLayout>
+            <Button
+                x:Name="xAddExeBtn"
+                Text="Add EXE"
+                Clicked="OnAddExeBtnClicked"
+                HorizontalOptions="Fill" />
+
+            <ScrollView>
+                <ListView
+                    x:Name="xProcessFileList"
+                    ItemSelected="xProcessFileList_ItemSelected"
+                    WidthRequest="300"
+                    VerticalScrollBarVisibility="Always"
+                    />
+            </ScrollView>
+        </VerticalStackLayout>
+
+        <ScrollView>
+            <Grid x:Name="xCoreList">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </ScrollView>
+
+
+        <VerticalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="Mask:"/>
+                <Label Text="0" x:Name="xMask" Margin="5,0,0,0"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="EXE:"/>
+                <Label Text="None" x:Name="xSelectedExe" Margin="5,0,0,0"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="Running:" VerticalTextAlignment="Center"/>
+                <CheckBox x:Name="xIsExeRunning" Margin="5,0,0,0"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="Affinity:"/>
+                <Label Text="None" x:Name="xSelectedExeAffinity" Margin="5,0,0,0"/>
+            </HorizontalStackLayout>
+            <Button
+                    Text="Update Mask"
+                    Clicked="OnUpdateMaskClicked" />
+            <Button
+                    Text="Apply Affinity"
+                    Clicked="OnApplyClicked" />
+        </VerticalStackLayout>
+    </HorizontalStackLayout>
+
+</ContentPage>

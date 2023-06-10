@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessAffinitySherpa", "ProcessAffinitySherpa\ProcessAffinitySherpa.csproj", "{64FA0D9F-59C1-4F72-B4DE-29548473D30C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AffinitySherpa", "AffinitySherpa\AffinitySherpa.csproj", "{2099A88E-AC39-40CD-B84D-63028ACBD88D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AffinitySherpa", "AffinitySherpa\AffinitySherpa.csproj", "{2099A88E-AC39-40CD-B84D-63028ACBD88D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,12 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{64FA0D9F-59C1-4F72-B4DE-29548473D30C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{64FA0D9F-59C1-4F72-B4DE-29548473D30C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{64FA0D9F-59C1-4F72-B4DE-29548473D30C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{64FA0D9F-59C1-4F72-B4DE-29548473D30C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{64FA0D9F-59C1-4F72-B4DE-29548473D30C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{64FA0D9F-59C1-4F72-B4DE-29548473D30C}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{2099A88E-AC39-40CD-B84D-63028ACBD88D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2099A88E-AC39-40CD-B84D-63028ACBD88D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2099A88E-AC39-40CD-B84D-63028ACBD88D}.Release|Any CPU.ActiveCfg = Release|Any CPU

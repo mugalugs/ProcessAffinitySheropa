@@ -40,11 +40,13 @@ namespace ProcessAffinitySherpa
 
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool Process32First(IntPtr hSnapshot, ref PROCESSENTRY32 lppe);
+        //private static extern bool Process32First(IntPtr hSnapshot, ref PROCESSENTRY32 lppe);
+        private static extern bool Process32First(IntPtr hSnapshot, IntPtr lppe);
 
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool Process32Next(IntPtr hSnapshot, ref PROCESSENTRY32 lppe);
+        //private static extern bool Process32Next(IntPtr hSnapshot, ref PROCESSENTRY32 lppe);
+        private static extern bool Process32Next(IntPtr hSnapshot, IntPtr lppe);
 
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern IntPtr OpenProcess(int dwDesiredAccess, bool bInheritHandle, int dwProcessId);
@@ -95,15 +97,23 @@ namespace ProcessAffinitySherpa
                 return;
             }
 
+            IntPtr pPROCESSENTRY32 = IntPtr.Zero;
+
             try
             {
                 PROCESSENTRY32 processEntry = new PROCESSENTRY32();
                 processEntry.dwSize = (uint)Marshal.SizeOf(typeof(PROCESSENTRY32));
 
-                if (Process32First(hSnapshot, ref processEntry))
+                int iSize = Marshal.SizeOf(typeof(PROCESSENTRY32));
+                pPROCESSENTRY32 = Marshal.AllocHGlobal(iSize);
+                Marshal.StructureToPtr(processEntry, pPROCESSENTRY32, false);
+
+                if (Process32First(hSnapshot, pPROCESSENTRY32))
                 {
                     do
                     {
+                        processEntry = (PROCESSENTRY32)Marshal.PtrToStructure(pPROCESSENTRY32, typeof(PROCESSENTRY32));
+
                         if (processEntry.szExeFile.Equals(ps.Name + ".exe", StringComparison.OrdinalIgnoreCase))
                         {
                             IntPtr hProcess = OpenProcess(PROCESS_PERMISSION, false, (int)processEntry.th32ProcessID);
@@ -150,7 +160,7 @@ namespace ProcessAffinitySherpa
                             }
                         }
                     }
-                    while (Process32Next(hSnapshot, ref processEntry));
+                    while (Process32Next(hSnapshot, pPROCESSENTRY32));
                 }
                 else
                 {
@@ -160,6 +170,7 @@ namespace ProcessAffinitySherpa
             finally
             {
                 CloseHandle(hSnapshot);
+                Marshal.FreeHGlobal(pPROCESSENTRY32);
             }
         }
 
@@ -173,15 +184,23 @@ namespace ProcessAffinitySherpa
                 return dict;
             }
 
+            IntPtr pPROCESSENTRY32 = IntPtr.Zero;
+
             try
             {
                 PROCESSENTRY32 processEntry = new PROCESSENTRY32();
                 processEntry.dwSize = (uint)Marshal.SizeOf(typeof(PROCESSENTRY32));
 
-                if (Process32First(hSnapshot, ref processEntry))
+                int iSize = Marshal.SizeOf(typeof(PROCESSENTRY32));
+                pPROCESSENTRY32 = Marshal.AllocHGlobal(iSize);
+                Marshal.StructureToPtr(processEntry, pPROCESSENTRY32, false);
+
+                if (Process32First(hSnapshot, pPROCESSENTRY32))
                 {
                     do
                     {
+                        processEntry = (PROCESSENTRY32)Marshal.PtrToStructure(pPROCESSENTRY32, typeof(PROCESSENTRY32));
+
                         if (processEntry.szExeFile.Equals(ps.Name + ".exe", StringComparison.OrdinalIgnoreCase))
                         {
                             IntPtr hProcess = OpenProcess(PROCESS_PERMISSION, false, (int)processEntry.th32ProcessID);
@@ -213,7 +232,7 @@ namespace ProcessAffinitySherpa
                             }
                         }
                     }
-                    while (Process32Next(hSnapshot, ref processEntry));
+                    while (Process32Next(hSnapshot, pPROCESSENTRY32));
                 }
                 else
                 {
@@ -223,6 +242,7 @@ namespace ProcessAffinitySherpa
             finally
             {
                 CloseHandle(hSnapshot);
+                Marshal.FreeHGlobal(pPROCESSENTRY32);
             }
 
             return dict;

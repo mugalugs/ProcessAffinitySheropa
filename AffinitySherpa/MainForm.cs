@@ -92,6 +92,8 @@ namespace AffinitySherpa
                 {
                     ProcessorSherpa.SetAffinity(ps);
                 }
+
+                GC.Collect();
             }
         }
 
@@ -132,10 +134,10 @@ namespace AffinitySherpa
                     }
 
                     processList.Items.Clear();
-                    List<Process> procs = ProcessorSherpa.GetProcesses(selectedProcess);
-                    foreach (Process process in procs)
+                    Dictionary<int, nint> procs = ProcessorSherpa.GetProcesses(selectedProcess);
+                    foreach (KeyValuePair<int, nint> process in procs)
                     {
-                        processList.Items.Add(new ListViewItem(new string[] { process.Id.ToString(), process.ProcessorAffinity.ToString() }));
+                        processList.Items.Add(new ListViewItem(new string[] { process.Key.ToString(), process.Value.ToString() }));
                     }
                 }
             }
@@ -168,10 +170,10 @@ namespace AffinitySherpa
                 Thread.Sleep(200);
 
                 processList.Items.Clear();
-                List<Process> procs = ProcessorSherpa.GetProcesses(selectedProcess);
-                foreach (Process process in procs)
+                Dictionary<int, nint> procs = ProcessorSherpa.GetProcesses(selectedProcess);
+                foreach (KeyValuePair<int, nint> process in procs)
                 {
-                    processList.Items.Add(new ListViewItem(new string[] { process.Id.ToString(), process.ProcessorAffinity.ToString() }));
+                    processList.Items.Add(new ListViewItem(new string[] { process.Key.ToString(), process.Value.ToString() }));
                 }
             }
         }
